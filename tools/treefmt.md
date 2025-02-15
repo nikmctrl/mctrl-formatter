@@ -1,27 +1,39 @@
 # Treefmt
 
 MissionCtrl's pre-configured all-in-one formatter for all tools used in MissionCtrl.
+
 ## Languages
 
 - `configuration` - nix configuration files
+  - formats json, toml, yaml, github actions
 - `js` - javascript and typescript files
+  - formats javascript, typescript,
 - `markdown` - markdown files
+  - formats markdown
 - `nix` - nix files
+  - formats nix
 - `python` - python files
+  - formats python
 - `shell` - shell files
+  - formats shell
 - `utilities` - utility files
+  - changes line endings to unix
+  - auto-sorts python imports
+  - uses (keep-sorted)\[https://github.com/google/keep-sorted\] to sort misc lines
+    - use `# keep-sorted start` and `# keep-sorted end` to mark the start and end of sorted lines and `keep-sorted start block=yes` to nest
 
 ## Lib Functions
+
 - `mkTreefmtPackage` - create a treefmt package for a given language
   - inputs:
     - `languages` - attrset of languages to enable
-      - e.g. ```nix {configuration.enable = true;}```
+      - e.g. `nix {configuration.enable = true;}`
   - returns:
     - `treefmt` - treefmt formatter derivation
 - `mkTreefmtCheck` - create a treefmt check for a given language
   - inputs:
     - `languages` - attrset of languages to enable
-      - e.g. ```nix {configuration.enable = true;}```
+      - e.g. `nix {configuration.enable = true;}`
   - returns:
     - `treefmt` - treefmt ci derivation
 
@@ -52,7 +64,7 @@ MissionCtrl's pre-configured all-in-one formatter for all tools used in MissionC
 ```bash
 # use the mctrl-tools or mctrl-formatter flake to get the formatter
 nix run github:nikmctrl/mctrl-tools#mctrl-formatter
-# or 
+# or
 nix run github:nikmctrl/mctrl-formatter
 ```
 
