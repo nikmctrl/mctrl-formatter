@@ -52,6 +52,7 @@
       in
       rec {
         packages = {
+          default = formatter;
           mctrl-formatter = formatter;
           mctrl-formatter-ci = formatter-ci;
         };

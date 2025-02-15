@@ -1,17 +1,48 @@
 # Treefmt
 
 MissionCtrl's pre-configured all-in-one formatter for all tools used in MissionCtrl.
+## Languages
+
+- `configuration` - nix configuration files
+- `js` - javascript and typescript files
+- `markdown` - markdown files
+- `nix` - nix files
+- `python` - python files
+- `shell` - shell files
+- `utilities` - utility files
+
+## Lib Functions
+- `mkTreefmtPackage` - create a treefmt package for a given language
+  - inputs:
+    - `languages` - attrset of languages to enable
+      - e.g. ```nix {configuration.enable = true;}```
+  - returns:
+    - `treefmt` - treefmt formatter derivation
+- `mkTreefmtCheck` - create a treefmt check for a given language
+  - inputs:
+    - `languages` - attrset of languages to enable
+      - e.g. ```nix {configuration.enable = true;}```
+  - returns:
+    - `treefmt` - treefmt ci derivation
 
 ## Nix Usage
 
 ```nix
 {
+    # either use the mctrl-tools (collection of tools) flake or the mctrl-formatter (individual) flake
     inputs.mctrl-tools.url = "github:nikmctrl/mctrl-tools";
+    inputs.mctrl-formatter.url = "github:nikmctrl/mctrl-formatter";
 
     outputs = {self, mctrl-tools, ...}: {
+        # use the mctrl-tools or mctrl-formatter flake to get the formatter
         formatter.aarch64-darwin = mctrl-tools.packages.aarch64-darwin.mctrl-formatter;
+        # or use the mctrl-formatter flake directly
+        formatter.aarch64-darwin = mctrl-formatter.packages.aarch64-darwin.mctrl-formatter;
 
-        checks.default = mctrl-tools.checks.formatted;
+        # use the mctrl-tools or mctrl-formatter flake to get the checks
+        checks.default = mctrl-tools.checks.isFormatted;
+        # or use the mctrl-formatter flake directly
+        checks.default = mctrl-formatter.checks.isFormatted;
     };
 }
 ```
@@ -19,7 +50,10 @@ MissionCtrl's pre-configured all-in-one formatter for all tools used in MissionC
 ## Usage
 
 ```bash
-nix run github:nikmctrl/treefmt
+# use the mctrl-tools or mctrl-formatter flake to get the formatter
+nix run github:nikmctrl/mctrl-tools#mctrl-formatter
+# or 
+nix run github:nikmctrl/mctrl-formatter
 ```
 
 ## Notes
