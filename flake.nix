@@ -25,9 +25,7 @@
             # maybe dprint
             projectRootFile = "flake.nix";
 
-            imports = [
-              ./languages
-            ];
+            imports = [ ./languages ];
 
             mctrl-formatter = languages;
           };
@@ -67,6 +65,8 @@
         };
 
         inherit formatter;
+
+        
       }
     );
 }

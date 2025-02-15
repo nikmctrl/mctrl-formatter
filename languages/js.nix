@@ -12,6 +12,14 @@ in
     # };
     programs.prettier = {
       enable = true;
+      settings = {
+        bracketSameLine = true;
+        bracketSpacing = true;
+        singleAttributePerLine = true;
+        singleQuote = true;
+        trailingComma = "all";
+        printWidth = 120;
+      };
     };
   };
 }
