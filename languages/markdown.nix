@@ -1,5 +1,5 @@
 {
   programs.mdformat = {
-            enable = true;
-          };
+    enable = true;
+  };
 }

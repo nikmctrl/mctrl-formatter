@@ -32,16 +32,23 @@
           programs.prettier = {
             enable = true;
           };
-          
+
         };
         treefmtOut = treefmtEval.config.build;
+
+        formatter = treefmtOut.wrapper;
       in
-      {
-        packages.default = treefmtOut.wrapper;
+      rec {
+        packages = {
+          mctrl-utils = {
+            inherit formatter;
+          };
+          default = formatter;
+        };
 
         checks.formatted = treefmtOut.check;
 
-        formatter = treefmtOut.wrapper;
+        inherit formatter;
       }
     );
 }
