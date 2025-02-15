@@ -7,22 +7,16 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, treefmt-nix }: flake-utils.lib.eachDefaultSystem (system: let 
-    treefmtEval = treefmt-nix.lib.evalModule nixpkgs {
+  outputs = { self, nixpkgs, flake-utils, treefmt-nix }: flake-utils.lib.eachDefaultSystem (system: let
+    treefmtEval = treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} {
       projectRootFile = "flake.nix";
       programs.terraform.enable = true;
     };
 
     treefmtOut = treefmtEval.config.build;
   in {
-    lib.mkTreefmtMctrl = {
-      src
-    }: {
-      treefmtMCtrl = treefmtOut.wrapper;
+      packages.default = treefmtOut.wrapper;
 
-      treefmtMCtrlChecks = treefmtOut.checks;
-
-      
-    };
+      checks.formatted = treefmtOut.check;
   });
 }
