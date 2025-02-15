@@ -9,7 +9,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       flake-utils,
       treefmt-nix,
@@ -27,78 +26,13 @@
             ./languages
           ];
 
-
-
-          # GH Action linting
-          programs.actionlint = {
-            enable = true;
-          };
-
-          # Python
-          
-
-          # Markdown
-          programs.mdformat = {
-            enable = true;
-          };
-
-          # Shell
-          programs.beautysh = {
-            enable = true;
-          };
-          programs.shfmt = {
-            enable = true;
-          };
-          programs.shellcheck = {
-            enable = true;
-          };
-
-          # Nix
-          programs.deadnix = {
-            enable = true;
-          };
-          programs.nixfmt-rfc-style = {
-            enable = true;
-          };
-          programs.statix = {
-            enable = true;
-          };
-
-          # Configuration Files
-          programs.jsonfmt = {
-            enable = true;
-          };
-          programs.formatjson5 = {
-            enable = true;
-          };
-          programs.taplo = {
-            enable = true;
-          };
-          programs.toml-sort = {
-            enable = true;
-          };
-          programs.yamlfmt = {
-            enable = true;
-          };
-
-          # Unsorted
           programs.biome = {
             enable = true;
           };
           programs.prettier = {
             enable = true;
           };
-
-          # Utils
-          programs.dos2unix = {
-            enable = true;
-          };
-          programs.isort = {
-            enable = true;
-          };
-          programs.keep-sorted = {
-            enable = true;
-          };
+          
         };
         treefmtOut = treefmtEval.config.build;
       in

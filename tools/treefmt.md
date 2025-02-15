@@ -21,7 +21,9 @@ nix run github:nikmctrl/treefmt
 ```
 
 ## Notes
-- all treefmt implemented tools (as of 2025-02-15)  
+
+- all treefmt implemented tools (as of 2025-02-15)
+
 ```nix
 [
   "actionlint"
