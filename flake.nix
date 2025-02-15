@@ -9,6 +9,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       flake-utils,
       treefmt-nix,
@@ -26,9 +27,7 @@
             ./languages
           ];
 
-          programs.biome = {
-            enable = true;
-          };
+          
           programs.prettier = {
             enable = true;
           };
@@ -40,13 +39,11 @@
       in
       rec {
         packages = {
-          mctrl-utils = {
-            inherit formatter;
-          };
+          mctrl-formatter = formatter;
           default = formatter;
         };
 
-        checks.formatted = treefmtOut.check;
+        checks.formatted = treefmtOut.check self;
 
         inherit formatter;
       }

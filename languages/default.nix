@@ -6,5 +6,6 @@
     ./configuration.nix
     ./shell.nix
     ./utilities.nix
+    ./js.nix
   ];
 }
