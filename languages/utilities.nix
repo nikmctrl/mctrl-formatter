@@ -1,11 +1,20 @@
+{ config, lib, ... }:
+let
+  cfg = config.mctrl-formatter.utilities;
+in
 {
-  programs.dos2unix = {
-    enable = true;
+  options.mctrl-formatter.utilities = {
+    enable = lib.mkEnableOption "Enable utility formatters";
   };
-  programs.isort = {
-    enable = true;
-  };
-  programs.keep-sorted = {
-    enable = true;
+  config = lib.mkIf cfg.enable {
+    programs.dos2unix = {
+      enable = true;
+    };
+    programs.isort = {
+      enable = true;
+    };
+    programs.keep-sorted = {
+      enable = true;
+    };
   };
 }

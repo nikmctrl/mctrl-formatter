@@ -1,11 +1,20 @@
+{ config, lib, ... }:
+let
+  cfg = config.mctrl-formatter.shell;
+in
 {
-  programs.beautysh = {
-    enable = true;
+  options.mctrl-formatter.shell = {
+    enable = lib.mkEnableOption "Enable shell script formatter";
   };
-  programs.shfmt = {
-    enable = true;
-  };
-  programs.shellcheck = {
-    enable = true;
+  config = lib.mkIf cfg.enable {
+    programs.beautysh = {
+      enable = true;
+    };
+    programs.shfmt = {
+      enable = true;
+    };
+    programs.shellcheck = {
+      enable = true;
+    };
   };
 }

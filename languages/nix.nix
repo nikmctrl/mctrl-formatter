@@ -1,11 +1,20 @@
+{ config, lib, ... }:
+let
+  cfg = config.mctrl-formatter.nix;
+in
 {
-  programs.deadnix = {
-    enable = true;
+  options.mctrl-formatter.nix = {
+    enable = lib.mkEnableOption "Enable Nix formatter";
   };
-  programs.nixfmt = {
-    enable = true;
-  };
-  programs.statix = {
-    enable = true;
+  config = lib.mkIf cfg.enable {
+    programs.deadnix = {
+      enable = true;
+    };
+    programs.nixfmt = {
+      enable = true;
+    };
+    programs.statix = {
+      enable = true;
+    };
   };
 }

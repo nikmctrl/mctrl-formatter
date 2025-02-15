@@ -9,7 +9,9 @@ MissionCtrl's pre-configured all-in-one formatter for all tools used in MissionC
     inputs.mctrl-tools.url = "github:nikmctrl/mctrl-tools";
 
     outputs = {self, mctrl-tools, ...}: {
-        packages.aarch64-darwin.treefmt = mctrl-tools.packages.aarch64-darwin.treefmt;
+        formatter.aarch64-darwin = mctrl-tools.packages.aarch64-darwin.mctrl-formatter;
+
+        checks.default = mctrl-tools.checks.formatted;
     };
 }
 ```

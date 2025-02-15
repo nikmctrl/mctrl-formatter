@@ -1,14 +1,23 @@
+{ config, lib, ... }:
+let
+  cfg = config.mctrl-formatter.python;
+in
 {
-  programs.black = {
-    enable = true;
+  options.mctrl-formatter.python = {
+    enable = lib.mkEnableOption "Enable python formatter";
   };
-  programs.mypy = {
-    enable = true;
-  };
-  programs.ruff-check = {
-    enable = true;
-  };
-  programs.ruff-format = {
-    enable = true;
+  config = lib.mkIf cfg.enable {
+    programs.black = {
+      enable = true;
+    };
+    programs.mypy = {
+      enable = true;
+    };
+    programs.ruff-check = {
+      enable = true;
+    };
+    programs.ruff-format = {
+      enable = true;
+    };
   };
 }

@@ -1,20 +1,29 @@
+{ config, lib, ... }:
+let
+  cfg = config.mctrl-formatter.configuration;
+in
 {
-  programs.jsonfmt = {
-    enable = true;
+  options.mctrl-formatter.configuration = {
+    enable = lib.mkEnableOption "Enable configuration file formatters";
   };
-  programs.formatjson5 = {
-    enable = true;
-  };
-  programs.taplo = {
-    enable = true;
-  };
-  programs.toml-sort = {
-    enable = true;
-  };
-  programs.yamlfmt = {
-    enable = true;
-  };
-  programs.actionlint = {
-    enable = true;
+  config = lib.mkIf cfg.enable {
+    programs.jsonfmt = {
+      enable = true;
+    };
+    programs.formatjson5 = {
+      enable = true;
+    };
+    programs.taplo = {
+      enable = true;
+    };
+    programs.toml-sort = {
+      enable = true;
+    };
+    programs.yamlfmt = {
+      enable = true;
+    };
+    programs.actionlint = {
+      enable = true;
+    };
   };
 }

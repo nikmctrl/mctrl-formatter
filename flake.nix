@@ -18,32 +18,52 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        treefmtEval = treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} {
-          # nginx, dockerfile, css, jsx, ini, mako, html
-          # maybe dprint
-          projectRootFile = "flake.nix";
+        treefmtEvalFn =
+          languages:
+          treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} {
+            # nginx, dockerfile, css, jsx, ini, mako, html
+            # maybe dprint
+            projectRootFile = "flake.nix";
 
-          imports = [
-            ./languages
-          ];
+            imports = [
+              ./languages
+            ];
 
-          
-          programs.prettier = {
-            enable = true;
+            mctrl-formatter = languages;
           };
 
+        treefmtEval = treefmtEvalFn {
+          configuration.enable = true;
+          js.enable = true;
+          markdown.enable = true;
+          nix.enable = true;
+          python.enable = true;
+          shell.enable = true;
+          utilities.enable = true;
         };
-        treefmtOut = treefmtEval.config.build;
 
+        mkTreefmtPackage = languages: (treefmtEvalFn languages).config.build.wrapper;
+        mkTreefmtCheck = languages: (treefmtEvalFn languages).config.checks.default;
+
+        treefmtOut = treefmtEval.config.build;
         formatter = treefmtOut.wrapper;
+        formatter-ci = treefmtOut.check self;
+
       in
       rec {
         packages = {
           mctrl-formatter = formatter;
-          default = formatter;
+          mctrl-formatter-ci = formatter-ci;
         };
 
-        checks.formatted = treefmtOut.check self;
+        checks = {
+          isFormatted = formatter-ci;
+        };
+
+        lib = {
+          inherit mkTreefmtPackage;
+          inherit mkTreefmtCheck;
+        };
 
         inherit formatter;
       }
