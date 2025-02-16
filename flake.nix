@@ -69,16 +69,5 @@
         inherit formatter;
 
       }
-    )
-    // {
-      mctrl-hooks.mctrl-formatter = {
-        enable = true;
-
-        name = "MissionCtrl Formatter";
-
-        entry = "nix fmt";
-
-        language = "system";
-      };
-    };
+    );
 }
