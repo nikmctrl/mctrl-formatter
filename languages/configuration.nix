@@ -18,6 +18,9 @@ in
     };
     programs.toml-sort = {
       enable = true;
+      excludes = [
+        ".pre-commit-config.yaml"
+      ];
     };
     programs.yamlfmt = {
       enable = true;
