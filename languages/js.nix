@@ -12,6 +12,9 @@ in
     # };
     programs.prettier = {
       enable = true;
+      excludes = [
+        ".pre-commit-config.yaml"
+      ];
       settings = {
         bracketSameLine = true;
         bracketSpacing = true;
