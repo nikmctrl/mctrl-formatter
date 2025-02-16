@@ -1,6 +1,15 @@
 {
   description = "MissionCtrl's pre-configured all-in-one formatter";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nikmctrl.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nikmctrl.cachix.org-1:W91Ki7qcSFa1E3krRGlilwh7qyfui0cx7Bdj6wwOgvA="
+    ];
+  };
+  
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
