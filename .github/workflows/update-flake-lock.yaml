@@ -3,8 +3,7 @@ on:
   workflow_dispatch:
   schedule:
     # Update the flake.lock every Sunday at 00:00 UTC
-    - cron: "0 0 * * 0"
-
+    - cron: '0 0 * * 0'
 jobs:
   lockfile:
     runs-on: ubuntu-latest
@@ -16,7 +15,7 @@ jobs:
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@main
         with:
-          pr-title: "Update flake.lock" # Title of PR to be created
+          pr-title: 'Update flake.lock' # Title of PR to be created
           pr-labels: | # Labels to be set on the PR
             dependencies
             automated
