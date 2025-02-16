@@ -78,8 +78,6 @@
 
         entry = "nix fmt";
 
-        types = [ "files" ];
-
         language = "system";
       };
     };
