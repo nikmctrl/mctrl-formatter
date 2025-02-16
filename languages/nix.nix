@@ -12,6 +12,7 @@ in
     };
     programs.nixfmt = {
       enable = true;
+      strict = true;
     };
     programs.statix = {
       enable = true;
