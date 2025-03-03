@@ -22,9 +22,7 @@ in
     };
     programs.yamlfmt = {
       enable = true;
-      excludes = [
-        ".pre-commit-config.yaml"
-      ];
+      excludes = [ ".pre-commit-config.yaml" ];
     };
     programs.actionlint = {
       enable = true;
